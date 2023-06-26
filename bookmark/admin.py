@@ -8,5 +8,5 @@ from bookmark.models import Bookmark
 # admin.site.regiter(Bookmark, BookmarkAdmin)
 
 @admin.register(Bookmark)
-class BookAdmin(admin.ModelAdmin):
+class BookmarkAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'url')
