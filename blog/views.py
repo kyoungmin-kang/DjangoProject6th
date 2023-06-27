@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, ArchiveIndexView, DetailView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, \
+    DayArchiveView, TodayArchiveView
 
 from blog.models import Post
 
@@ -11,6 +12,7 @@ class PostLV(ListView):
     context_object_name = 'posts'
     paginate_by = 2
 
+
 class PostDV(DetailView):
     model = Post
 
@@ -20,39 +22,26 @@ class PostAV(ArchiveIndexView):
     date_field = 'modify_dt'
 
 
-class YearArchiveIndexView:
-    pass
-
-
-class PostYAV(YearArchiveIndexView):
+class PostYAV(YearArchiveView):
     model = Post
     date_field = 'modify_dt'
     make_object_list = True
     # month_format = '%b'
 
 
-class MonthArchiveIndexView:
-    pass
-
-
-class PostMAV(MonthArchiveIndexView):
+class PostMAV(MonthArchiveView):
     model = Post
+    date_field = 'modify_dt'
+    month_format = '%m'
+
+
+class PostDAV(DayArchiveView):
+    model = Post
+    month_format = '%m'
     date_field = 'modify_dt'
 
 
-class DayArchiveIndexView:
-    pass
-
-
-class PostDAV(DayArchiveIndexView):
+class PostTAV(TodayArchiveView):
     model = Post
     date_field = 'modify_dt'
-
-
-class TodayArchiveIndexView:
-    pass
-
-
-class PostTAV(TodayArchiveIndexView):
-    model = Post
-    date_field = 'modify_dt'
+    template_name = 'blog/post_archive_day.html'
