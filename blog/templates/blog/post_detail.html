@@ -3,7 +3,7 @@
 <p>
     {% if object.get_previous %}
         <a href="{{ object.get_previous.get_absolute_url }}">
-            &laquo;-- {{ object.get_previous }}
+            <i class="fas fa-arrow-circle-left"></i> {{ object.get_previous }}
         </a>
     {% endif %}
 
@@ -21,3 +21,4 @@
 <div>
     {{ object.content|linebreaks }}
 </div>
+{% endblock content %}}
