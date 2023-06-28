@@ -22,8 +22,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a href="#" class="nav-link">
+            <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link">
                     Home <span class="sr-only">current</span>
                 </a>
             </li>
@@ -31,7 +31,7 @@
                 <a href="{% url 'index' %}" class="nav-link">Bookmark</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'blog.index' %}" class="nav-link">Blog</a>
+                <a href="{% url 'blog:index' %}" class="nav-link">Blog</a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -39,10 +39,10 @@
                     Util
                 </a>
                 <div class="dropdown-menu">
-                    <a href="{% }" class="dropdown-item">Action</a>
-                    <a href="#" class="dropdown-item">Another Action</a>
+                    <a href="{% url 'admin:index' %}" class="dropdown-item" target="_blank">Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">Something else here</a>
+                    <a href="{% url 'blog:post_archive' %}" class="dropdown-item">Archive</a>
+                    <a href="{% url 'blog:search' %}" class="dropdown-item">Search</a>
                 </div>
             </li>
             <li class="nav-item">
