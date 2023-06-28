@@ -1,6 +1,4 @@
 from django.conf import settings
-
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, \
     DayArchiveView, TodayArchiveView, TemplateView
 
@@ -20,10 +18,9 @@ class PostDV(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from django.conf import settings
         context['disqus_short'] = f"{settings.DISQUS_SHORTNAME}"
         context['disqus_id'] = f"post-{self.object.id}-{self.object.slug}"
-        context['disqus_url'] = f"{settings.DISQUS_DOMAIN}-{self.object.get_absolute_url()}"
+        context['disqus_url'] = f"{settings.DISQUS_MY_DOMAIN}{self.object.get_absolute_url()}"
         context['disqus_title'] = f"{self.object.slug}"
         return context
 
@@ -48,8 +45,8 @@ class PostMAV(MonthArchiveView):
 
 class PostDAV(DayArchiveView):
     model = Post
-    month_format = '%m'
     date_field = 'modify_dt'
+    month_format = '%m'
 
 
 class PostTAV(TodayArchiveView):
@@ -59,11 +56,11 @@ class PostTAV(TodayArchiveView):
 
 
 class TagCloudTV(TemplateView):
-    template_name = 'taggit/taggit cloud.html'
+    template_name = 'taggit/taggit_cloud.html'
 
 
 class TaggedObjectLV(ListView):
-    template_name = 'taggit/taggit post list.html'
+    template_name = 'taggit/taggit_post_list.html'
     model = Post
 
     def get_queryset(self):
@@ -71,5 +68,5 @@ class TaggedObjectLV(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tagname']= self.kwargs['tag']
+        context['tagname'] = self.kwargs['tag']
         return context
