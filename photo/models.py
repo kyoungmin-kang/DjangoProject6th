@@ -1,7 +1,11 @@
 from django.db import models
+from django.urls import reverse
+
+from photo.fields import ThumbnailImageField
+
 
 # Create your models here.
-class Album(models.Model)
+class Album(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField('One Line Description', max_length=100, blank=True)
 
@@ -12,7 +16,7 @@ class Album(models.Model)
         return self.name
 
     def get_absolute_url(self):
-        return reverse('photo:album_detail', args=(self.id))
+        return reverse('photo:album_detail', args=(self.id,))
 
 
 class Photo(models.Model):
@@ -23,11 +27,10 @@ class Photo(models.Model):
     upload_dt = models.DateTimeField('Uploaded Date', auto_now_add=True)
 
     class Meta:
-        ordering = ('title')
+        ordering = ('title',)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('photo:photo_detail', args=(self.id))
-
+        return reverse('photo:photo_detail', args=(self.id,))
