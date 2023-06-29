@@ -16,6 +16,10 @@ class ThumbnailImageFieldFile(ImageFieldFile):
     def thumb_path(self):
         return self._add_thumb(self.path)
 
+    @property
+    def thumb_url(self):
+        return self._add_thumb(self.url)
+
     def save(self, name, content, save=True):
         super().save(name, content, save)
 
