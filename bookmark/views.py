@@ -1,14 +1,18 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from bookmark.models import Bookmark
+from mysite.views import OwnerOnlyMixin
 
+# 중략
 
-# Create your views here.
+class BookmarkCreateView(LoginRequiredMixin, CreateView):
+    pass
 
-class BookmarkLV(ListView):
-    model = Bookmark
+class BookmarkChangeLV(LoginRequiredMixin, ListView):
+    pass
 
+class BookmarkUpdateView(OwnerOnlyMixin, UpdateView):
+    pass
 
-class BookmarkDV(DetailView):
-    model = Bookmark
+class BookmarkDeleteView(OwnerOnlyMixin, DeleteView):
+    pass
