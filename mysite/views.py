@@ -19,3 +19,4 @@ class UserCreateDoneTV(TemplateView):
 
 class OwnerOnlyMixin(AccessMixin):
     pass
+
