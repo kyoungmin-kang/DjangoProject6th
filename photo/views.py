@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from mysite.views import OwnerOnlyMixin
+from photo.forms import PhotoInlineFormSet
 from photo.models import Album, Photo
 
 
@@ -52,9 +53,10 @@ class AlbumChangeLV(LoginRequiredMixin, ListView):
         return Album.objects.filter(owner=self.request.user)
 
 
-class AlbumDelV(OwnerOnlyMixin, DeleteView):
+class AlbumPhotoDelV(OwnerOnlyMixin, DeleteView):
     model = Album
     success_url = reverse_lazy('photo:index')
+
 
 class AlbumPhotoCV(LoginRequiredMixin, CreateView):
     model = Album
@@ -83,7 +85,6 @@ class AlbumPhotoCV(LoginRequiredMixin, CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-
 class AlbumPhotoUV(OwnerOnlyMixin, UpdateView):
     model = Album
     fields = ('name', 'description')
@@ -107,4 +108,3 @@ class AlbumPhotoUV(OwnerOnlyMixin, UpdateView):
             return redirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
-
